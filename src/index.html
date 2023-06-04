@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/dist/output.css" rel="stylesheet">
+    <title>Fractto: Split the bill, fast.</title>
+</head>
+<body>
+    <section id="header" class="w-full h-16 bg-purple-500 flex">
+        <div class="w-1/4 h-full flex justify-start">
+            <div class="w-8 h-8 my-auto ml-2 rounded-full bg-white flex justify-center items-center">
+                <span>🧮</span>
+            </div>
+        </div>
+        <div class="w-2/4 h-full flex justify-center">
+            <h1 class="my-auto text-white text-2xl text-center font-mono">/mesadewalt</h1>
+        </div>
+        <div class="w-1/4 h-full flex justify-end">
+            <div class="w-8 h-8 my-auto mr-2 rounded-full bg-white flex justify-center items-center">
+                <span>👩🏿‍🦰</span>
+            </div>
+        </div>
+    </section>
+    <section id="tableShare" class="w-full pt-8 px-8 flex flex-col items-center text-center hidden">
+        <h3 class="text-xl mb-5">¡Excelente!, ya tienes una mesa.</h3>
+        <p class="mb-5">Invita a tus amigos a tu mesa compartiendo el siguiente link:</p>
+        <div class="mb-5 h-10 w-full rounded-lg bg-gray-100 flex flex-col justify-center">
+            <span class="font-mono text-purple-900">https://www.fractto.co/MesaDeWalt</span>
+        </div>
+        <button class="p-2 w-12 bg-purple-500 rounded-lg text-white font-medium">✉️</button>
+    </section>
+    <section id="userInfo" class="w-full pt-8 px-8 hidden">
+        <h2 class="text-xl text-purple-700">Tu Información:</h2>
+        <hr>
+        <form class="my-5 text-center">
+            <p>¿Cual es tu nombre?</p>
+            <input type="hidden" value="si" id="jefe_mesa">
+            <input type="hidden" value="" id="id_mesa">
+            <input class="text-center mt-2 mb-2 h-10 w-full rounded-lg bg-gray-100 flex flex-col justify-center" autocomplete="off" type="text" placeholder="" name="nombre" id="nombre" required>
+            <p>Escoge tu ávatar para identificarte:</p>
+            <ul class="flex justify-center my-2">
+                <li><input class="w-14 h-14 mx-1" type="radio" name="avatar" value="avatar1" required></li>
+                <li><input class="w-14 h-14 mx-1" type="radio" name="avatar" value="avatar2" required></li>
+                <li><input class="w-14 h-14 mx-1" type="radio" name="avatar" value="avatar3" required></li>
+                <li><input class="w-14 h-14 mx-1" type="radio" name="avatar" value="avatar4" required></li>
+            </ul>
+            <p>¿Como prefieres realizar tu pago hoy?</p>
+            <ul class="flex justify-center my-2">
+                <li><input class="w-14 h-14 mx-1" type="radio" name="method" value="method1" required></li>
+                <li><input class="w-14 h-14 mx-1" type="radio" name="method" value="method2" required></li>
+                <li><input class="w-14 h-14 mx-1" type="radio" name="method" value="method3" required></li>
+                <li><input class="w-14 h-14 mx-1" type="radio" name="method" value="method4" required></li>
+            </ul>
+            <input type="submit" id="submitClient" style="display:none;">
+        </form>
+        <div class="w-full flex justify-end">
+            <button class="p-2 w-12 bg-purple-500 rounded-lg">👉🏻</button>
+        </div>
+    </section>
+    <section id="tableFill" class="w-full pt-8 px-8">
+        <div class=" w-full text-center mb-5">
+            <h3 class="text-xl mb-5">¡Tienes compañía!</h3>
+            <p class="">Verifica que nadie haga falta antes de continuar</p>
+        </div>
+        <div class="flex items-end">
+            <h2 class="text-xl text-purple-700 w-1/2">Tu Mesa:</h2>
+            <div class="flex justify-end w-1/2 mb-2">
+                <button class="p-2 w-12 bg-purple-500 rounded-lg">🙋🏼‍♀️</button>
+            </div>
+        </div>
+        <hr>
+        <ul id="datagrid" class="bg-purple-50 h-64 rounded-b-lg p-5">
+            <li class="bg-purple-100 h-14 rounded-lg mb-5"></li>
+            <li class="bg-purple-100 h-14 rounded-lg mb-5"></li>
+            <li class="bg-purple-100 h-14 rounded-lg mb-5"></li>
+        </ul>
+        <div class="w-full flex justify-end mt-5">
+            <button class="p-2 w-12 bg-purple-500 rounded-lg">👉🏻</button>
+        </div>
+    </section>
+    <section id="userOrder" class="hidden">
+        <div class="col-12 content text-center float-left">
+            <div class="fraccion">
+                <div class="col-12 information float-left">
+                    <h5 class="col-6">Tu Fracción:</h5><span class="resultFactura price">$0</span>
+                    <hr>
+                    <form class="formFactura float-left" id="form-consultar-factura" onclick="contandoFactura();" style="width:100%;">
+                        <div class="col-12 float-left">
+                            <div class="row">
+                                <div class="col-6">
+                                    <ul class="in-fraccion">
+                                        <li><img src=""><label>Entrada:</label></li>
+                                        <li><img src=""><label>Plato Fuerte:</label></li>
+                                        <li><img src=""><label>Bebida:</label></li>
+                                        <li><img src=""><label>Postre:</label></li>
+                                        <li><img src=""><label>Propina:</label></li>
+                                    </ul>
+                                </div>
+                                <div class="col-6">
+                                    <form class="result-fraccion">
+                                        <input class="text text-right" min="0" id="entrada" type="number" value="" placeholder="$0">
+                                        <input class="text text-right" min="0" id="plato" type="number" value="" placeholder="$0">
+                                        <input class="text text-right" min="0" id="bebidas" type="number" value="" placeholder="$0">
+                                        <input class="text text-right" min="0" id="postre" type="number" value="" placeholder="$0">
+                                        <div class="propina">
+                                            <div class="porcentaje"><img src=""></div>
+                                            <input class="text text-right" min="0" id="propina" value="" type="number" placeholder="$0">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-12 information float-left">
+                    <h5 class="col-6">Tu Billetera:</h5><span class="price totalBilletera">$0</span>
+                    <hr>
+                    <form class="formFactura float-left" id="form-consultar-billetera" onclick="contandoBilletera();" style="width:100%;">
+                    <ul class="list-billetera">
+                        <li><img src=""><input value="0" min="0" id="conteo1" class="inpBilletes" type="number"></li>
+                        <li><img src=""><input value="0" min="0" id="conteo2" class="inpBilletes" type="number"></li>
+                        <li><img src=""><input value="0" min="0" id="conteo3" class="inpBilletes" type="number"></li>
+                        <li><img src=""><input value="0" min="0" id="conteo4" class="inpBilletes" type="number"></li>
+                    </ul>
+                    <ul class="list-billetera">
+                        <li><img src=""><input value="0" min="0" id="conteo5" class="inpBilletes" type="number"></li>
+                        <li><img src=""><input value="0" min="0" id="conteo6" class="inpBilletes" type="number"></li>
+                        <li><img src=""><input value="0" min="0" id="conteo7" class="inpBilletes" type="number"></li>
+                        <li><img src=""><input id="monedas" class="inpBilletes" type="checkbox" value="si" onclick="valorMoneda();"></li>
+                    </ul>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="guestOwner" class="hidden">
+        <div class="col-12 content text-center float-left">
+            <div class="list-check">
+                <h6>¿Pagarás por alguien mas?</h6>
+                <ul class="list-payup" id="list-payup">
+                    
+                </ul>
+            </div>
+        </div>
+    </section>
+    <section id="tableSummary" class="hidden">
+        <div class="col-12 content text-center float-left">
+            <div class="posCuadro">
+                <p>Ahora, déjanos saber los siguientes datos:</p>
+                <div class="col-12 float-left information">
+                    <h5 class="col-7">Tu Factura</h5>
+                    <span class="price totalFactura">$</span>
+                    <hr>
+                    <div class="col-12 sin-padding float-left">
+                        <div class="row">
+                            <div class="col-6">
+                                <ul class="in-fraccion">
+                                    <li><label>Valor Total Factura</label></li>
+                                    <li><label>Valor Propina Factura</label></li>
+                                </ul>
+                            </div>
+                            <div class="col-6">
+                                <form class="result-fraccion">
+                                    <input class="totalFactura" type="text" placeholder="$0" disabled>
+                                    <input class="del-factura totalPropina" type="text" placeholder="$0" disabled>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 float-left information">
+                    <h5 class="col-7">Tu Mesa</h5>
+                    <span class="price">$98.600</span>
+                    <ul class="list-payup scrollApp" style="max-height:300px;">
+                        <li>
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-3">
+                                        <div>
+                                            <img class="img-pay" src="">
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <p>Evelin Artwork</p>
+                                    </div>
+                                    <div class="col-3 sin-padding">
+                                        <div class="result-friend">
+                                            <div class="txt">
+                                                <span>$10.700</span>
+                                                <span>$1.000</span>
+                                                <span class="total">$14.700</span>
+                                            </div>
+                                            <div class="img-method">
+                                                <img class="img-pay" src="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-3">
+                                        <div>
+                                            <img class="img-pay" src="">
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <p>Emma Rodríguez</p>
+                                    </div>
+                                    <div class="col-3 sin-padding">
+                                        <div class="result-friend">
+                                            <div class="txt">
+                                                <span>$20.700</span>
+                                                <span>$1.500</span>
+                                                <span class="total">$21.500</span>
+                                            </div>
+                                            <div class="img-method">
+                                                <img class="img-pay" src="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-3">
+                                        <div class="Queen">
+                                            <img class="img-pay" src="">
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <p>Luisa Martín</p>
+                                    </div>
+                                    <div class="col-3 sin-padding">
+                                        <div class="result-friend">
+                                            <div class="txt">
+                                                <span>$10.700</span>
+                                                <span>$1.000</span>
+                                                <span class="total">$14.700</span>
+                                            </div>
+                                            <div class="img-method">
+                                                <img class="img-pay" src="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-3">
+                                        <div class="Queen">
+                                            <img class="img-pay" src="">
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <p>Evelin Artwork</p>
+                                    </div>
+                                    <div class="col-3 sin-padding">
+                                        <div class="result-friend">
+                                            <div class="txt">
+                                                <span>$10.700</span>
+                                                <span>$1.000</span>
+                                                <span class="total">$14.700</span>
+                                            </div>
+                                            <div class="img-method">
+                                                <img class="img-pay" src="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
