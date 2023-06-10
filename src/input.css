@@ -1,3 +1,58 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+/* CUSTOM CLASSES */
+
+.card {
+    @apply w-full rounded-2xl overflow-hidden flex-none
+}
+
+.card-top {
+    @apply aspect-[4/2.5] xs:aspect-[4/3] w-full bg-slate-400 bg-cover
+}
+
+.card-bottom {
+    @apply h-20 w-full bg-alternate1 p-4 flex justify-between
+}
+
+.card-bottom-left {
+    @apply flex items-center w-2/3
+}
+
+.card-bottom-left-logo {
+    @apply max-h-12 h-full aspect-square bg-red-200 rounded-lg bg-cover
+}
+
+.card-bottom-left-text-container {
+    @apply ml-2 flex flex-col
+}
+
+.card-bottom-left-text-name {
+    @apply font-bold text-sm xs:text-lg w-36 xs:w-44 truncate
+}
+
+.card-bottom-left-text-location {
+    @apply text-secondary font-light text-xs xs:text-sm w-32 xs:w-44 truncate
+}
+
+.card-bottom-right {
+    @apply h-full flex items-center
+}
+
+.card-bottom-btn {
+    @apply w-auto py-3 px-4 bg-primary rounded-xl text-white font-light text-sm truncate
+}
+
+
+/* TECHNICALS */
+
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+
+.scrollbar-hide {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
