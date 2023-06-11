@@ -46,7 +46,7 @@
                         </div>
                     </div>
                     <div id="card-bottom-right" class="!hidden card-bottom-right">
-                        <button id="card-button" class="card-bottom-btn">Crear mesa</button>
+                        <button id="card-button" class="card-bottom-btn">Ingresar</button>
                     </div>
                 </div>
             </div>
@@ -113,6 +113,16 @@
 
         </div>
     </section>
+    <section id="people">
+        <div class="flex justify-between mx-5">
+            <span class="font-bold text-lg">Tu Mesa (1p)</span>
+            <span class="text-sm text-alternate1 after:content-['→']">¿Alguien sin internet? </span>
+        </div>
+        <div class="w-auto h-auto mt-4 mb-4 items-start overflow-x-auto overscroll-x-contain flex space-x-7 scrollbar-hide px-5">
+            <div class="rounded-2xl w-16 aspect-square bg-yellow-400 bg-cover flex-none"></div>
+            <div class="rounded-2xl w-16 aspect-square bg-orange-400 bg-cover flex-none"></div>
+        </div>
+    </section>
     <section id="miniapps" class="">
         <div class="flex justify-between mx-5">
             <span class="font-bold mb-4 text-lg">Mini apps</span>
@@ -164,7 +174,7 @@
             <div class="text-3xl">📍</div>
         </div>
     </section>
-    <section id="step1">
+    <section id="form">
         <form>
             <div id="userName" class="mx-5">
                 <span class="font-bold text-lg">Tu nombre</span>
@@ -209,24 +219,36 @@
             </div>
             <div id="tableName" class="m-5 flex flex-col">
                 <span class="font-bold text-lg">Tu mesa</span>
-                <span class="">Escoge un nombre que identifique tu mesa</span>
-                <span class="hidden">Ingresa el nombre de la mesa a la que ingresarás</span>
+                <span id="create-table-text" class="text-secondary text-sm">Escoge un nombre que identifique tu mesa</span>
+                <span id="enter-table-text" class="hidden text-secondary text-sm">Ingresa el nombre de la mesa a la que accederás</span>
                 <div class="mt-5">
                     <div class="flex">
-                        <div class="w-1/2 h-20 bg-primary text-white rounded-tl-2xl text-center pt-3 text-sm font-bold">Crear Mesa</div>
-                        <div class="w-1/2 h-20 bg-blue-200 text-blue-50 rounded-tr-2xl text-center pt-3 text-sm font-bold">¡Tengo un link!</div>
+                        <div id="create-table-title" class="w-1/2 h-20 bg-primary text-white rounded-tl-2xl text-center pt-3 text-sm font-bold cursor-pointer">Crear Mesa</div>
+                        <div id="enter-table-title" class="w-1/2 h-20 bg-blue-200 text-blue-50 rounded-tr-2xl text-center pt-3 text-sm font-bold cursor-pointer">¡Tengo un link!</div>
                     </div>
                     <div class="w-full h-16 rounded-2xl bg-orange-500 flex justify-between items-center -mt-8 relative">
                         <div class="w-8/12 truncate">
                             <span class="ml-5 text-white font-bold">fractto.co/</span>
-                            <input class="bg-transparent w-7/12 text-white placeholder-white placeholder-opacity-50 focus:placeholder-opacity-0 focus:outline-none" placeholder="CumpleDeMary">
+                            <input type="hidden" id="table-type" name="table-type" value="new-table">
+                            <input id="table-address" class="bg-transparent w-7/12 text-white placeholder-white placeholder-opacity-50 focus:placeholder-opacity-0 focus:outline-none" placeholder="CumpleDeMary" required>
                         </div>
-                        <button class="w-3/12 mr-5 py-2 px-4 bg-white rounded-xl text-black font-bold text-sm truncate">Crear</button>
+                        <button id="create-table-button" class="w-3/12 mr-5 py-2 px-4 bg-white rounded-xl text-black font-bold text-sm truncate">Crear</button>
+                        <button id="enter-table-button" class="hidden w-3/12 mr-5 py-2 px-4 bg-white rounded-xl text-black font-bold text-sm truncate">Ingresar</button>
                     </div>
                 </div>
-                <span class="text-xs text-blue-300 text-center mt-2">* No puede contener espacios ni carácteres especiales.</span>
+                <span id="create-table-instructions" class="text-xs text-blue-300 text-center mt-2">* No puede contener espacios ni carácteres especiales.</span>
             </div>
         </form>
+    </section>
+    <section id="closure" class="fixed bottom-1 w-full p-5 flex justify-between items-center">
+        <div class="w-2/5 h-full">
+            <span class="font-bold text-lg">Total:</span>
+            <span class="text-lg text-alternate1 text-right">$445.947</span>
+        </div>
+        <div class="h-16 w-3/5 rounded-2xl bg-orange-500 flex justify-between items-center">
+            <div class="rounded-xl ml-5 w-10 aspect-square bg-orange-400 bg-cover flex-none"></div>
+            <button class="py-2 px-4 mr-2 text-white" style="border-color: white; border-width: 1px; border-radius: 100px;">Cerrar mesa</button>
+        </div>
     </section>
 
 
